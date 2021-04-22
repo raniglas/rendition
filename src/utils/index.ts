@@ -47,3 +47,68 @@ export const stopEvent = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
 	event.preventDefault();
 	event.stopPropagation();
 };
+
+export const stopKeyDownEvent = (
+	e: React.KeyboardEvent<HTMLElement>,
+	keyCode: number,
+	handler?: () => void,
+) => {
+	if (!e.defaultPrevented && e.keyCode === keyCode) {
+		e.preventDefault();
+		e.stopPropagation();
+		if (handler) {
+			handler();
+		}
+	}
+};
+
+export const withPreventDefault = (fn: () => unknown) => (
+	e?: React.FormEvent<HTMLElement>,
+) => {
+	if (e && e.preventDefault) {
+		e.preventDefault();
+	}
+	return fn();
+};
+
+export const limitedMap = <T, U>(
+	arr: T[],
+	fn: (currentValue: T, index: number, array: T[]) => Promise<U>,
+	limit: number,
+): Promise<U[]> => {
+	if (limit >= arr.length) {
+		return Promise.all(arr.map(fn));
+	}
+	return new Promise<U[]>((resolve, reject) => {
+		const result: U[] = new Array(arr.length);
+		let inFlight = 0;
+		let idx = 0;
+		const runNext = async () => {
+			// Store the idx to use for this call before incrementing the main counter
+			const i = idx;
+			idx++;
+			if (i >= arr.length) {
+				return;
+			}
+			try {
+				inFlight++;
+				result[i] = await fn(arr[i], i, arr);
+				runNext();
+			} catch (err) {
+				// Stop any further iterations
+				idx = arr.length;
+				// Clear the results so far for gc
+				result.length = 0;
+				reject(err);
+			} finally {
+				inFlight--;
+				if (inFlight === 0) {
+					resolve(result);
+				}
+			}
+		};
+		while (inFlight < limit) {
+			runNext();
+		}
+	});
+};

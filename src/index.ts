@@ -107,6 +107,10 @@ import * as SchemaSieve from './components/Filters/SchemaSieve';
 export { SchemaSieve };
 
 export {
+	Collection,
+} from './experimental/autoui/Collection';
+
+export {
 	ResponsiveStyle,
 	StyledSystemProps,
 	PineDataType,

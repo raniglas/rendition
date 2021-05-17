@@ -65,6 +65,15 @@ const getUniqueOsTypes = (
 	return uniq(osVersions[deviceTypeSlug].map((x) => x.osType));
 };
 
+export interface DownloadOptions {
+	applicationId: number;
+	deviceType: string;
+	appUpdatePollInterval?: number;
+	downloadConfigOnly?: boolean;
+	network: 'ethernet' | 'wifi';
+	version: string;
+}
+
 export interface UnstableTempDownloadImageModalProps {
 	application: Application;
 	compatibleDeviceTypes: DeviceType[] | null;
@@ -72,6 +81,10 @@ export interface UnstableTempDownloadImageModalProps {
 	initialOsVersions?: OsVersionsByDeviceType;
 	isInitialDefault?: boolean;
 	downloadUrl: string;
+	onDownloadStart?: (
+		downloadConfigOnly: boolean,
+		downloadOptions: DownloadOptions,
+	) => void;
 	getSupportedOsVersions?: () => Promise<OsVersionsByDeviceType>;
 	getSupportedOsTypes?: (
 		applicationId: number,
@@ -88,7 +101,7 @@ export interface UnstableTempDownloadImageModalProps {
 		rawVersion: string | null,
 	) => Promise<string>;
 	onClose: () => void;
-	authToken: string | null;
+	authToken?: string;
 }
 
 export const UnstableTempDownloadImageModal = ({
@@ -98,6 +111,7 @@ export const UnstableTempDownloadImageModal = ({
 	initialDeviceType,
 	initialOsVersions,
 	isInitialDefault,
+	onDownloadStart,
 	getSupportedOsVersions,
 	getSupportedOsTypes,
 	getDockerArtifact,
@@ -210,7 +224,7 @@ export const UnstableTempDownloadImageModal = ({
 		[compatibleDeviceTypes, deviceType],
 	);
 
-	if (!deviceType || !authToken) {
+	if (!deviceType) {
 		return null;
 	}
 
@@ -249,6 +263,7 @@ export const UnstableTempDownloadImageModal = ({
 							)}
 							{!!osType && !!compatibleDeviceTypes && (
 								<ImageForm
+									onDownloadStart={onDownloadStart}
 									setIsDownloadingConfig={setIsDownloadingConfig}
 									deviceType={deviceType}
 									appId={application.id}

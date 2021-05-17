@@ -66,6 +66,7 @@ interface ImageFormProps {
 	rawVersion: string | null;
 	deviceType: DeviceType;
 	authToken?: string;
+	onDownloadStart?: (downloadConfigOnly: boolean) => void;
 	setIsDownloadingConfig: (isDownloading: boolean) => void;
 	downloadConfig: (event: React.MouseEvent) => Promise<void>;
 	getDownloadSize: () => Promise<string>;
@@ -78,6 +79,7 @@ export const ImageForm = ({
 	rawVersion,
 	deviceType,
 	authToken,
+	onDownloadStart,
 	setIsDownloadingConfig,
 	downloadConfig,
 	getDownloadSize,
@@ -93,6 +95,9 @@ export const ImageForm = ({
 	});
 
 	const setDownloadConfigOnly = (downloadConfigOnly: boolean) => {
+		if (typeof onDownloadStart === 'function') {
+			onDownloadStart(downloadConfigOnly);
+		}
 		setModel({
 			...model,
 			downloadConfigOnly,

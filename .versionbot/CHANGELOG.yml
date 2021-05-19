@@ -1,4 +1,17 @@
 - commits:
+    - subject: Add missing on download event
+      hash: 37880e0358f38d7626e1a44e32d14dd7a65d6f99
+      body: |
+        Add missing on download event
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Andrea Rosci <andrear@balena.io>
+        signed-off-by: Andrea Rosci <andrear@balena.io>
+      author: JSReds
+  version: 20.14.1
+  date: 2021-05-19T16:10:49.355Z
+- commits:
     - subject: Add Download image modal component as unstable
       hash: b081af746fe3fbfe5f6fa386b7720f26cb188bc1
       body: |

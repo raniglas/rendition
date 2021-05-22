@@ -116,7 +116,7 @@
     "@fortawesome/react-fontawesome": "^0.1.5",
     "@mapbox/rehype-prism": "^0.5.0",
     "@react-google-maps/api": "^1.9.7",
-    "@rjsf/core": "^2.2.1",
+    "@rjsf/core": "raniglas/react-jsonschema-form#autocapitalize_support_v2_2_1",
     "@types/ajv-keywords": "^3.4.0",
     "@types/color": "^3.0.0",
     "@types/json-schema": "^7.0.5",

@@ -225,6 +225,7 @@ export default css`
 		position: absolute;
 		z-index: 6;
 		display: none;
+		outline: 0;
 	}
 	.CodeMirror-vscrollbar {
 		right: 0;
@@ -411,7 +412,7 @@ export default css`
 		flex-direction: row;
 		flex-wrap: wrap;
 	}
-	.CodeMirror {
+	.EasyMDEContainer .CodeMirror {
 		box-sizing: border-box;
 		height: auto;
 		border: 1px solid #ddd;
@@ -422,10 +423,10 @@ export default css`
 		z-index: 0;
 		word-wrap: break-word;
 	}
-	.CodeMirror-scroll {
+	.EasyMDEContainer .CodeMirror-scroll {
 		cursor: text;
 	}
-	.CodeMirror-fullscreen {
+	.EasyMDEContainer .CodeMirror-fullscreen {
 		background: #fff;
 		position: fixed !important;
 		top: 50px;
@@ -437,19 +438,19 @@ export default css`
 		border-right: none !important;
 		border-bottom-right-radius: 0 !important;
 	}
-	.CodeMirror-sided {
+	.EasyMDEContainer .CodeMirror-sided {
 		width: 50% !important;
 	}
-	.CodeMirror-sided.sided--no-fullscreen {
+	.EasyMDEContainer.sided--no-fullscreen .CodeMirror-sided {
 		border-right: none !important;
 		border-bottom-right-radius: 0;
 		position: relative;
 		flex: 1 1 auto;
 	}
-	.CodeMirror-placeholder {
+	.EasyMDEContainer .CodeMirror-placeholder {
 		opacity: 0.5;
 	}
-	.CodeMirror-focused .CodeMirror-selected {
+	.EasyMDEContainer .CodeMirror-focused .CodeMirror-selected {
 		background: #d9d9d9;
 	}
 	.editor-toolbar {
@@ -459,24 +460,12 @@ export default css`
 		-ms-user-select: none;
 		-o-user-select: none;
 		user-select: none;
-		padding: 0 10px;
+		padding: 9px 10px;
 		border-top: 1px solid #bbb;
 		border-left: 1px solid #bbb;
 		border-right: 1px solid #bbb;
 		border-top-left-radius: 4px;
 		border-top-right-radius: 4px;
-	}
-	.editor-toolbar:after,
-	.editor-toolbar:before {
-		display: block;
-		content: ' ';
-		height: 1px;
-	}
-	.editor-toolbar:before {
-		margin-bottom: 8px;
-	}
-	.editor-toolbar:after {
-		margin-top: 8px;
 	}
 	.editor-toolbar.fullscreen {
 		width: 100%;
@@ -542,7 +531,7 @@ export default css`
 		margin: 0;
 		padding: 0;
 	}
-	.editor-toolbar.sided--no-fullscreen {
+	.EasyMDEContainer.sided--no-fullscreen .editor-toolbar {
 		width: 100%;
 	}
 	.editor-toolbar .easymde-dropdown,
@@ -612,7 +601,7 @@ export default css`
 		color: #959694;
 		text-align: right;
 	}
-	.editor-statusbar.sided--no-fullscreen {
+	.EasyMDEContainer.sided--no-fullscreen .editor-statusbar {
 		width: 100%;
 	}
 	.editor-statusbar span {
@@ -656,7 +645,7 @@ export default css`
 	.editor-preview-active-side {
 		display: block;
 	}
-	.editor-preview-active-side.sided--no-fullscreen {
+	.EasyMDEContainer.sided--no-fullscreen .editor-preview-active-side {
 		flex: 1 1 auto;
 		height: auto;
 		position: static;
@@ -741,7 +730,8 @@ export default css`
 		);
 	}
 	.easymde-dropdown-content {
-		display: none;
+		display: block;
+		visibility: hidden;
 		position: absolute;
 		background-color: #f9f9f9;
 		box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -751,7 +741,19 @@ export default css`
 	}
 	.easymde-dropdown:active .easymde-dropdown-content,
 	.easymde-dropdown:focus .easymde-dropdown-content {
+		visibility: visible;
+	}
+	span[data-img-src]::after {
+		content: '';
+		background-image: var(--bg-image);
 		display: block;
+		max-height: 100%;
+		max-width: 100%;
+		background-size: contain;
+		height: 0;
+		padding-top: var(--height);
+		width: var(--width);
+		background-repeat: no-repeat;
 	}
 	.CodeMirror
 		.cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {

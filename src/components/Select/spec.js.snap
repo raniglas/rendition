@@ -237,6 +237,7 @@ exports[`Select component should match the stored snapshot 1`] = `
           >
             <input
               autoComplete="off"
+              autoCapitalize="off"
               className="c8 c9 c10"
               onBlur={[Function]}
               onFocus={[Function]}

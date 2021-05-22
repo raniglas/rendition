@@ -133,7 +133,7 @@
     "color": "^3.1.2",
     "color-hash": "^1.0.3",
     "copy-to-clipboard": "^3.0.8",
-    "grommet": "^2.14.0",
+    "grommet": "raniglas/grommet#autocapitalize_support_2_14_0",
     "json-e": "^4.1.0",
     "hast-util-sanitize": "^3.0.0",
     "lodash": "^4.17.11",

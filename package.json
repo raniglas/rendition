@@ -153,6 +153,7 @@
     "remark-parse": "^8.0.3",
     "remark-rehype": "^7.0.0",
     "resize-observer": "^1.0.0",
+    "strip-css-comments": "^3.0.0",
     "styled-components": "^5.0.1",
     "styled-system": "^4.1.0",
     "tslib": "^2.0.0",

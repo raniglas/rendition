@@ -21,7 +21,7 @@
     "npm": ">=5.7.0"
   },
   "scripts": {
-    "tsify-css": "npm install strip-css-comments prettier && node ./scripts/tsifyCss.js",
+    "tsify-css": "npm install && node ./scripts/tsifyCss.js",
     "dev": "npm run build && npm run start",
     "start": "start-storybook -p 6006",
     "build:cjs": "rimraf dist && tsc",

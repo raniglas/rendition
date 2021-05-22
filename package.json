@@ -21,7 +21,7 @@
     "npm": ">=5.7.0"
   },
   "scripts": {
-    "tsify-css": "npm install strip-css-comments && node ./scripts/tsifyCss.js",
+    "tsify-css": "npm install strip-css-comments prettier && node ./scripts/tsifyCss.js",
     "dev": "npm run build && npm run start",
     "start": "start-storybook -p 6006",
     "build:cjs": "rimraf dist && tsc",
@@ -92,7 +92,7 @@
     "lint-staged": "^4.1.1",
     "match-media-mock": "^0.1.1",
     "monaco-editor-webpack-plugin": "^1.9.0",
-    "prettier": "^2.0.5",
+    "prettier": "^2.3.0",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-test-renderer": "^16.8.5",

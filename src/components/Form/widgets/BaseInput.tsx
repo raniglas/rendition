@@ -45,6 +45,7 @@ const BaseInput = (props: FormWidgetProps) => {
 				autoFocus={autofocus}
 				// Form suggestions will clash with browser suggestions if autocomplete is on
 				autoComplete={hasExamples ? 'off' : (options.autoComplete as string)}
+				autoCapitalize={options.autoCapitalize as string}
 				emphasized={options.emphasized as boolean}
 				value={value == null ? '' : value}
 				type={

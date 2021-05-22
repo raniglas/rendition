@@ -63,6 +63,7 @@ export interface InternalTextareaProps
 		GrommetTextAreaProps {
 	monospace?: boolean;
 	autoComplete?: string;
+	autoCapitalize?: string;
 	autoFocus?: boolean;
 	cols?: number;
 	dirName?: string;
